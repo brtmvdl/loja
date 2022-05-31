@@ -1,4 +1,3 @@
-const { NotFoundError } = require('/mercado/commons/errors')
 const db = require('/mercado/commons/db')
 const loginIndex = db.in('logins')
 const userIndex = db.in('users')
