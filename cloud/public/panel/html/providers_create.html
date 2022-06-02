@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julia Store - Painel</title>
+</head>
+
+<body>
+
+  <div id="app"></div>
+
+  <script src="./back.js"></script>
+  <script src="./front.js"></script>
+  <script src="./commons.js"></script>
+
+  <script>
+    const app = nElement.fromId('app')
+
+    const center = new nContainerComponent()
+
+    const page_title = new nH1()
+    page_title.setText('Julia Store')
+    center.top.append(page_title)
+
+    const page_subtitle = new nH2()
+    page_subtitle.setText('Adicionar fornecedor')
+    center.top.append(page_subtitle)
+
+    const providers_name = new nTextInputComponent()
+    providers_name.label.setText('Nome')
+    providers_name.input.placeholder('Nome do fornecedor')
+    center.left.append(providers_name)
+
+    const errors = new nTextError()
+    center.left.append(errors)
+
+    const providers_create_button = new nButton()
+    providers_create_button.setText('Salvar')
+    providers_create_button.on('click', () => {
+      const name = providers_name.input.getValue()
+
+      Api.providersCreate({ name })
+        .then(() => { })
+        .catch((error) => {
+          switch(error) {
+            case ErrorTypes.VALIDATION: {
+              providers_name.error.setText(error.get('name'))
+            } break
+
+            case ErrorTypes.RESPONSE: {
+              errors.setText(error.getMessage())
+            } break
+          }
+        })
+    })
+    center.left.append(providers_create_button)
+
+    app.append(center)
+  </script>
+
+</body>
+
+</html>
