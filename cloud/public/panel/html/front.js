@@ -152,6 +152,32 @@ class nTextInput extends nValuable {
   }
 }
 
+class nPasswordInput extends nValuable {
+  constructor() {
+    super({
+      component: { name: 'text-input' },
+      element: { tagName: 'input' }
+    })
+
+    this.attr('type', 'password')
+
+    this.style('box-shadow', '0 0 0.1rem 0 black')
+    this.style('box-sizing', 'border-box')
+    this.style('margin', '0 0 0.5rem 0')
+    this.style('padding', '0.5rem')
+    this.style('outline', 'none')
+    this.style('font', 'inherit')
+    this.style('border', 'none')
+    this.style('width', '100%')
+  }
+
+  placeholder(text = '') {
+    const self = this
+    self.attr('placeholder', text)
+    return self
+  }
+}
+
 class nTextarea extends nValuable {
   constructor() {
     super({
@@ -383,6 +409,23 @@ class nTextInputComponent extends nElement {
 
   constructor() {
     super({ component: { name: 'text-input-component' } })
+
+    this.label.style('margin', '0 0 0.5rem 0')
+    this.error.style('margin', '0 0 0.5rem 0')
+
+    super.append(this.label)
+    super.append(this.input)
+    super.append(this.error)
+  }
+}
+
+class nPasswordInputComponent extends nElement {
+  label = new nText()
+  input = new nPasswordInput()
+  error = new nTextError()
+
+  constructor() {
+    super({ component: { name: 'password-input-component' } })
 
     this.label.style('margin', '0 0 0.5rem 0')
     this.error.style('margin', '0 0 0.5rem 0')
