@@ -112,10 +112,13 @@ Ajax.upload = (file, { name, size, type } = {}) => {
 
 const Api = {}
 
-Api.usersLogin = ({ email } = {}) =>
-  Validator.with({ email })
-    .validate({ email: [Validation.email()] })
-    .then(() => Ajax.post(['users', 'login'], { email }))
+Api.usersLogin = ({ email, password } = {}) =>
+  Validator.with({ email, password })
+    .validate({ 
+      email: [Validation.email()],
+      password: [Validation.required()],
+     })
+    .then(() => Ajax.post(['users', 'login'], { email, password }))
     .then((resp) => AppData.set('login', resp.get('token')))
     .then(() => Flow.goTo('dashboard.html'))
 
