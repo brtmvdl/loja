@@ -59,15 +59,18 @@ const HttpResponse = function () {
     self.config.status_code = '403'
     self.config.status_message = 'Forbidden'
 
+    const data = { stack: err?.stack }
+
     if (err instanceof ApplicationError) {
       self.config.status_code = err.status_code
       self.config.status_message = err.status_message
+      data.extras = err.extras
     }
 
     self.config.body = JSON.stringify({
       status: 'error',
       message: err.message,
-      data: { stack: err?.stack },
+      data,
     })
 
     return self
@@ -100,8 +103,6 @@ const HttpResponse = function () {
       '',
       body,
     ].join(LINE_BREAK))
-
-    // console.log({ resp })
 
     return resp
   }
