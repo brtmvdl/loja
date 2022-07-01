@@ -27,6 +27,7 @@ services:
       - './cloud/api/upload:/go/src'
       - './cloud/api/commons:/julia_store/commons'
       - './data:/julia_store/data'
+      - './logs:/julia_store/logs'
 
   api_users_login:
     hostname: api_users_login
@@ -36,6 +37,7 @@ services:
       - './cloud/api/users-login:/julia_store/app'
       - './cloud/api/commons:/julia_store/commons'
       - './data:/julia_store/data'
+      - './logs/api_users_login:/julia_store/logs'
 
   api_users_register:
     hostname: api_users_register
@@ -45,6 +47,7 @@ services:
       - './cloud/api/users-register:/julia_store/app'
       - './cloud/api/commons:/julia_store/commons'
       - './data:/julia_store/data'
+      - './logs/api_users_register:/julia_store/logs'
 
   api_providers_list:
     hostname: api_providers_list
@@ -54,6 +57,7 @@ services:
       - './cloud/api/providers-list:/julia_store/app'
       - './cloud/api/commons:/julia_store/commons'
       - './data:/julia_store/data'
+      - './logs/api_providers_list:/julia_store/logs'
 
   api_providers_create:
     hostname: api_providers_create
@@ -63,3 +67,4 @@ services:
       - './cloud/api/providers-create:/julia_store/app'
       - './cloud/api/commons:/julia_store/commons'
       - './data:/julia_store/data'
+      - './logs/api_providers_create:/julia_store/logs'
