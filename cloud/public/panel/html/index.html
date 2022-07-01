@@ -25,20 +25,25 @@
     title.setText('Julia Store')
     form.append(title)
 
-    const input = new nTextInputComponent()
-    input.label.setText('E-mail')
-    form.append(input)
+    const emailInput = new nTextInputComponent()
+    emailInput.label.setText('E-mail')
+    form.append(emailInput)
+
+    const passwordInput = new nPasswordInputComponent()
+    passwordInput.label.setText('Password')
+    form.append(passwordInput)
 
     const button = new nButton()
     button.setText('Entrar')
     button.on('click', () => {
-      const email = input.input.getValue()
+      const email = emailInput.input.getValue()
+      const password = passwordInput.input.getValue()
 
-      Api.usersLogin({ email })
+      Api.usersLogin({ email, password })
         .catch((error) => {
           switch (error.type) {
             case ErrorTypes.VALIDATION:
-              return input.error.setText(error.get('email'))
+              return email.error.setText(error.get('email'))
 
             case ErrorTypes.RESPONSE:
               return errors.setText(error.getMessage())
