@@ -1,4 +1,16 @@
 
+const Translator = {
+  translations: {
+    'pt-br': {
+      'Can not duplicate this item.': 'Esse item não pode ser duplicado.',
+      'User not found.': 'Usuário não encontrado.',
+    },
+  },
+  in: (language) => ({
+    translate: (phrase) => Translator.translations[language][phrase] || '--'
+  })
+}
+
 const Flow = {}
 
 Flow.goTo = (url) => (window.location = url)
