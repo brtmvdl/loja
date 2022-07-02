@@ -25,6 +25,10 @@
     title.setText('Julia Store')
     form.append(title)
 
+    const subtitle = new nH2()
+    subtitle.setText('Login')
+    form.append(subtitle)
+
     const emailInput = new nTextInputComponent()
     emailInput.label.setText('E-mail')
     form.append(emailInput)
@@ -42,11 +46,13 @@
       Api.usersLogin({ email, password })
         .catch((error) => {
           switch (error.type) {
-            case ErrorTypes.VALIDATION:
-              return email.error.setText(error.get('email'))
+            case ErrorTypes.VALIDATION: {
+              emailInput.error.setText(error.get('email'))
+              passwordInput.error.setText(error.get('password'))
+            }; break
 
             case ErrorTypes.RESPONSE:
-              return errors.setText(error.getMessage())
+              return errors.setText(error.getTranslatedMessage())
           }
         })
     })
@@ -56,8 +62,8 @@
     form.append(errors)
 
     const link = new nLink()
-    link.setText('QR Code')
-    link.href('qr-code.html')
+    link.setText('Me cadastrar')
+    link.href('register.html')
     form.append(link)
 
     app.append(form)
