@@ -1,11 +1,11 @@
 const { DuplicatedError } = require('/julia_store/commons/errors')
-const userIndex = require('/julia_store/commons/db').in('users')
+const usersIndex = require('/julia_store/commons/db').in('users')
 
-module.exports = ({ body: { email } }, res) => {
-  if (userIndex.select({ email }).length)
-    throw new DuplicatedError({ email })
+module.exports = ({ body: { email, password } }, res) => {
+  if (usersIndex.selectOne({ email, password }))
+    throw new DuplicatedError(null, { email })
 
   const created_at = Date.now().toString()
-  userIndex.new().writeMany({ email, created_at })
+  usersIndex.new().writeMany({ email, password, created_at })
   return res.json({ created_at })
 }
