@@ -15,14 +15,14 @@ class ApplicationError extends Error {
 }
 
 class DuplicatedError extends ApplicationError {
-  constructor(extras = {}) {
-    super('Can not duplicate this item.', '403', extras)
+  constructor(message, extras = {}) {
+    super(message || 'Can not duplicate this item.', '403', extras)
   }
 }
 
 class NotFoundError extends ApplicationError {
-  constructor(message = 'Not found item.', extras = {}) {
-    super(message, '404', extras)
+  constructor(message, extras = {}) {
+    super(message || 'Not found item.', '404', extras)
   }
 }
 
