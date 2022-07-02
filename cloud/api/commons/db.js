@@ -39,7 +39,7 @@ class DataObject {
 
   writeMany(many) {
     Object.keys(many)
-      .map((key) => this.writeString(key, many[key].toString()), this)
+      .map((key) => this.writeString(key, many[key]), this)
 
     return this
   }
