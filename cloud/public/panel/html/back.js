@@ -114,18 +114,21 @@ const Api = {}
 
 Api.usersLogin = ({ email, password } = {}) =>
   Validator.with({ email, password })
-    .validate({ 
+    .validate({
       email: [Validation.email()],
       password: [Validation.required()],
-     })
+    })
     .then(() => Ajax.post(['users', 'login'], { email, password }))
     .then((resp) => AppData.set('login', resp.get('token')))
     .then(() => Flow.goTo('dashboard.html'))
 
-Api.usersRegister = ({ email } = {}) =>
-  Validator.with({ email })
-    .validate({ email: [Validation.email()] })
-    .then(() => Ajax.post(['users', 'register'], { email }))
+Api.usersRegister = ({ email, password } = {}) =>
+  Validator.with({ email, password })
+    .validate({
+      email: [Validation.email()],
+      password: [Validation.required()],
+    })
+    .then(() => Ajax.post(['users', 'register'], { email, password }))
     .then(() => Flow.goTo('login.html'))
 
 Api.newsCreate = ({ title, text, files } = {}) =>

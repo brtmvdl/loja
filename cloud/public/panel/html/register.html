@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julia Store - Painel</title>
+</head>
+
+<body>
+
+  <div id="app"></div>
+
+  <script src="./back.js"></script>
+  <script src="./front.js"></script>
+  <script src="./commons.js"></script>
+
+  <script>
+    const app = nElement.fromId('app')
+
+    const form = new nCenterForm()
+
+    const title = new nH1()
+    title.setText('Julia Store')
+    form.append(title)
+
+    const subtitle = new nH2()
+    subtitle.setText('Me cadastrar')
+    form.append(subtitle)
+
+    const emailInput = new nTextInputComponent()
+    emailInput.label.setText('E-mail')
+    form.append(emailInput)
+
+    const passwordInput = new nPasswordInputComponent()
+    passwordInput.label.setText('Password')
+    form.append(passwordInput)
+
+    const button = new nButton()
+    button.setText('Entrar')
+    button.on('click', () => {
+      const email = emailInput.input.getValue()
+      const password = passwordInput.input.getValue()
+
+      Api.usersRegister({ email, password })
+        .catch((error) => {
+          switch (error.type) {
+            case ErrorTypes.VALIDATION: {
+              emailInput.error.setText(error.get('email'))
+              passwordInput.error.setText(error.get('password'))
+            }; break
+
+            case ErrorTypes.RESPONSE:
+              return errors.setText(error.getTranslatedMessage())
+          }
+        })
+    })
+    form.append(button)
+
+    const errors = new nTextError()
+    form.append(errors)
+
+    const link = new nLink()
+    link.setText('Fazer login')
+    link.href('index.html')
+    form.append(link)
+
+    app.append(form)
+  </script>
+
+</body>
+
+</html>
