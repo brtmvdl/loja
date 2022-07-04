@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julia Store - Painel</title>
+</head>
+
+<body>
+
+  <div id="app"></div>
+
+  <script src="./back.js"></script>
+  <script src="./front.js"></script>
+  <script src="./commons.js"></script>
+
+  <script>
+    const app = nTag.fromId('app')
+
+    const center = new nContainerComponent()
+
+    const page_title = new nH1()
+    page_title.setText('Julia Store')
+    center.top.append(page_title)
+
+    const page_subtitle = new nH2()
+    page_subtitle.setText('Produtos')
+    center.top.append(page_subtitle)
+
+    const products_list = new nTag()
+    // TODO
+    center.left.append(products_list)
+
+    Api.productsList({ search: '' }) // TODO
+
+    const products_create_link = new nButtonLink()
+    products_create_link.setText('Adicionar produtos')
+    products_create_link.href('products_create.html')
+    center.right.append(products_create_link)
+
+    app.append(center)
+  </script>
+
+</body>
+
+</html>

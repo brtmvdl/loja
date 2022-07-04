@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julia Store - Painel</title>
+</head>
+
+<body>
+
+  <div id="app"></div>
+
+  <script src="./back.js"></script>
+  <script src="./front.js"></script>
+  <script src="./commons.js"></script>
+
+  <script>
+    const app = nTag.fromId('app')
+
+    const center = new nContainerComponent()
+
+    const page_title = new nH1()
+    page_title.setText('Julia Store')
+    center.top.append(page_title)
+
+    const page_subtitle = new nH2()
+    page_subtitle.setText('Adicionar fornecedor')
+    center.top.append(page_subtitle)
+
+    const products_name = new nTextInputComponent()
+    products_name.label.setText('Nome')
+    center.left.append(products_name)
+
+    const products_price = new nTextInputComponent()
+    products_price.label.setText('Preço')
+    center.left.append(products_price)
+
+    const products_photos = new nFileInputComponent()
+    products_photos.label.setText('Preço')
+    products_photos.input.on('file', ({ file: { id } }) => products_gallery.addPhotoId(id))
+    center.left.append(products_photos)
+
+    const products_gallery = new nGalleryComponent()
+    center.left.append(products_gallery)
+
+    const errors = new nTextError()
+    center.left.append(errors)
+
+    const products_create_button = new nButton()
+    products_create_button.setText('Salvar')
+    products_create_button.on('click', () => {
+      const name = products_name.input.getValue()
+      const price = products_price.input.getValue()
+      const photos = products_gallery.ids
+
+      Api.productsCreate({ name, price, photos })
+        .then(console.log)
+        .catch((error) => {
+          switch (error) {
+            case ErrorTypes.VALIDATION: {
+              products_name.error.setText(error.get('name'))
+              products_price.error.setText(error.get('price'))
+              products_photos.error.setText(error.get('photos'))
+            } break
+
+            case ErrorTypes.RESPONSE: {
+              errors.setText(error.getTranslatedMessage())
+            } break
+          }
+        })
+    })
+    center.left.append(products_create_button)
+
+    app.append(center)
+  </script>
+
+</body>
+
+</html>
