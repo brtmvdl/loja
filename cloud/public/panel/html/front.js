@@ -15,7 +15,7 @@ const Flow = {}
 
 Flow.goTo = (url) => (window.location = url)
 
-class nElement {
+class nTag {
 
   constructor(options = {}) {
     if (options?.element?.tagName) {
@@ -30,8 +30,8 @@ class nElement {
     this.container.classList.add(`ct-${name}`)
     this.element.classList.add(`el-${name}`)
 
-    this.style('outline', 'none')
-    this.style('box-sizing', 'border-box')
+    this.setStyle('outline', 'none')
+    this.setStyle('box-sizing', 'border-box')
   }
 
   container = document.createElement('div')
@@ -43,13 +43,13 @@ class nElement {
   }
 
   static fromElement(el, options = {}) {
-    const component = new nElement(options)
+    const component = new nTag(options)
     component.loadElement(el)
     return component
   }
 
   static fromId(id, options) {
-    return nElement.fromElement(document.getElementById(id), options)
+    return nTag.fromElement(document.getElementById(id), options)
   }
 
   loadElement(element) {
@@ -70,13 +70,13 @@ class nElement {
     return self
   }
 
-  style(name, value) {
+  setStyle(name, value) {
     const self = this
     self.element.style[name] = value
     return self
   }
 
-  styleContainer(name, value) {
+  setStyleContainer(name, value) {
     const self = this
     self.container.style[name] = value
     return self
@@ -93,16 +93,16 @@ class nElement {
     return self.element.innerText
   }
 
-  append(nelement = new nElement) {
+  append(ntag = new nTag) {
     const self = this
-    self.element.append(nelement.render())
+    self.element.append(ntag.render())
     return self
   }
 
-  set(nelement = new nElement) {
+  set(ntag = new nTag) {
     const self = this
-    self.element.childNodes.forEach(c => c.remove())
-    self.element.append(nelement.render())
+    self.element.childNodes.forEach(c => c.emove())
+    self.element.append(ntag.render())
     return self
   }
 
@@ -123,7 +123,7 @@ class nElement {
   }
 }
 
-class nValuable extends nElement {
+class nValuable extends nTag {
 
   setValue(value) {
     const self = this
@@ -147,14 +147,14 @@ class nTextInput extends nValuable {
 
     this.attr('type', 'text')
 
-    this.style('box-shadow', '0 0 0.1rem 0 black')
-    this.style('box-sizing', 'border-box')
-    this.style('margin', '0 0 0.5rem 0')
-    this.style('padding', '0.5rem')
-    this.style('outline', 'none')
-    this.style('font', 'inherit')
-    this.style('border', 'none')
-    this.style('width', '100%')
+    this.setStyle('box-shadow', '0 0 0.1em 0 black')
+    this.setStyle('box-sizing', 'border-box')
+    this.setStyle('margin', '0 0 0.5em 0')
+    this.setStyle('padding', '0.5em')
+    this.setStyle('outline', 'none')
+    this.setStyle('font', 'inherit')
+    this.setStyle('border', 'none')
+    this.setStyle('width', '100%')
   }
 
   placeholder(text = '') {
@@ -173,14 +173,14 @@ class nPasswordInput extends nValuable {
 
     this.attr('type', 'password')
 
-    this.style('box-shadow', '0 0 0.1rem 0 black')
-    this.style('box-sizing', 'border-box')
-    this.style('margin', '0 0 0.5rem 0')
-    this.style('padding', '0.5rem')
-    this.style('outline', 'none')
-    this.style('font', 'inherit')
-    this.style('border', 'none')
-    this.style('width', '100%')
+    this.setStyle('box-shadow', '0 0 0.1em 0 black')
+    this.setStyle('box-sizing', 'border-box')
+    this.setStyle('margin', '0 0 0.5em 0')
+    this.setStyle('padding', '0.5em')
+    this.setStyle('outline', 'none')
+    this.setStyle('font', 'inherit')
+    this.setStyle('border', 'none')
+    this.setStyle('width', '100%')
   }
 
   placeholder(text = '') {
@@ -197,15 +197,15 @@ class nTextarea extends nValuable {
       element: { tagName: 'textarea' }
     })
 
-    this.style('box-shadow', '0 0 0.1rem 0 black')
-    this.style('box-sizing', 'border-box')
-    this.style('margin', '0 0 0.5rem 0')
-    this.style('padding', '0.5rem')
-    this.style('outline', 'none')
-    this.style('font', 'inherit')
-    this.style('resize', 'none')
-    this.style('border', 'none')
-    this.style('width', '100%')
+    this.setStyle('box-shadow', '0 0 0.1em 0 black')
+    this.setStyle('box-sizing', 'border-box')
+    this.setStyle('margin', '0 0 0.5em 0')
+    this.setStyle('padding', '0.5em')
+    this.setStyle('outline', 'none')
+    this.setStyle('font', 'inherit')
+    this.setStyle('resize', 'none')
+    this.setStyle('border', 'none')
+    this.setStyle('width', '100%')
   }
 
   setRows(rows) {
@@ -256,7 +256,7 @@ class nTextError extends nText {
   constructor() {
     super({ component: { name: 'text-error' } })
 
-    this.style('color', 'red')
+    this.setStyle('color', 'red')
   }
 }
 
@@ -264,10 +264,10 @@ class nH1 extends nText {
   constructor() {
     super({ component: { name: 'h1' } })
 
-    this.styleContainer('display', 'inline-block')
-    this.styleContainer('width', '100%')
-    this.style('text-align', 'center')
-    this.style('font-size', '3rem')
+    this.setStyleContainer('display', 'inline-block')
+    this.setStyleContainer('width', '100%')
+    this.setStyle('text-align', 'center')
+    this.setStyle('font-size', '3em')
   }
 }
 
@@ -275,38 +275,38 @@ class nH2 extends nH1 {
   constructor() {
     super({ component: { name: 'h2' } })
 
-    this.style('font-size', '1.5rem')
+    this.setStyle('font-size', '1.5em')
   }
 }
 
-class nButton extends nElement {
+class nButton extends nTag {
   constructor() {
     super({
       component: { name: 'button' },
       element: { tagName: 'button' }
     })
 
-    this.style('display', 'inline-block')
-    this.style('margin', '0 0 0.5rem 0')
-    this.style('padding', '0.5rem')
-    this.style('cursor', 'pointer')
-    this.style('outline', 'none')
-    this.style('font', 'inherit')
-    this.style('background-color', '#dddddd')
-    this.style('border', 'none')
-    this.style('width', '100%')
+    this.setStyle('display', 'inline-block')
+    this.setStyle('margin', '0 0 0.5em 0')
+    this.setStyle('padding', '0.5em')
+    this.setStyle('cursor', 'pointer')
+    this.setStyle('outline', 'none')
+    this.setStyle('font', 'inherit')
+    this.setStyle('background-color', '#dddddd')
+    this.setStyle('border', 'none')
+    this.setStyle('width', '100%')
   }
 }
 
-class nLink extends nElement {
+class nLink extends nTag {
   constructor() {
     super({
       component: { name: 'link' },
       element: { tagName: 'a' }
     })
 
-    this.styleContainer('text-align', 'center')
-    this.style('text-decoration', 'none')
+    this.setStyleContainer('text-align', 'center')
+    this.setStyle('text-decoration', 'none')
   }
 
   href(url) {
@@ -316,39 +316,39 @@ class nLink extends nElement {
   }
 }
 
-class nCenterForm extends nElement {
+class nCenterForm extends nTag {
   constructor() {
     super({ component: { name: 'center-form' } })
 
-    this.styleContainer('margin', '2rem auto')
-    this.styleContainer('width', '30rem')
+    this.setStyleContainer('margin', '2em auto')
+    this.setStyleContainer('width', '30em')
 
-    this.style('background-color', '#ffffff')
-    this.style('display', 'inline-block')
-    this.style('padding', '1rem')
-    this.style('width', '100%')
+    this.setStyle('background-color', '#ffffff')
+    this.setStyle('display', 'inline-block')
+    this.setStyle('padding', '1em')
+    this.setStyle('width', '100%')
   }
 }
 
-class nFlex extends nElement {
+class nFlex extends nTag {
   constructor() {
     super({
       component: { name: 'flex' }
     })
 
-    this.style('display', 'flex')
-    this.style('justify-content', 'space-between')
+    this.setStyle('display', 'flex')
+    // this.setStyle('justify-content', 'space-between')
   }
 }
 
-class nImage extends nElement {
+class nImage extends nTag {
   constructor() {
     super({
       component: { name: 'image' },
       element: { tagName: 'img' }
     })
 
-    this.style('max-width', '100%')
+    this.setStyle('max-width', '100%')
   }
 
   src(src) {
@@ -368,40 +368,40 @@ class nButtonLink extends nLink {
   constructor() {
     super({ component: { name: 'button-link' } })
 
-    this.style('background-color', '#dddddd')
-    this.style('box-shadow', 'border-box')
-    this.style('display', 'inline-block')
-    this.style('color', '#000000')
-    this.style('padding', '1rem')
-    this.style('width', '100%')
+    this.setStyle('background-color', '#dddddd')
+    this.setStyle('box-shadow', 'border-box')
+    this.setStyle('display', 'inline-block')
+    this.setStyle('color', '#000000')
+    this.setStyle('padding', '1em')
+    this.setStyle('width', '100%')
   }
 }
 
 // components
 
-class nContainerComponent extends nElement {
+class nContainerComponent extends nTag {
 
-  top = new nElement()
-  left = new nElement()
-  right = new nElement()
-  bottom = new nElement()
+  top = new nTag()
+  left = new nTag()
+  right = new nTag()
+  bottom = new nTag()
 
   constructor() {
     super({
       component: { name: 'container-component' },
     })
 
-    this.style('margin', '0 auto')
-    this.style('width', '50rem')
+    this.setStyle('margin', '0 auto')
+    this.setStyle('width', '50em')
 
     super.append(this.top)
 
     const middle = new nFlex()
 
-    this.left.styleContainer('width', '69%')
+    this.left.setStyleContainer('width', '69%')
     middle.append(this.left)
 
-    this.right.styleContainer('width', '30%')
+    this.right.setStyleContainer('width', '30%')
     middle.append(this.right)
 
     super.append(middle)
@@ -414,7 +414,7 @@ class nContainerComponent extends nElement {
   }
 }
 
-class nTextInputComponent extends nElement {
+class nTextInputComponent extends nTag {
   label = new nText()
   input = new nTextInput()
   error = new nTextError()
@@ -422,8 +422,8 @@ class nTextInputComponent extends nElement {
   constructor() {
     super({ component: { name: 'text-input-component' } })
 
-    this.label.style('margin', '0 0 0.5rem 0')
-    this.error.style('margin', '0 0 0.5rem 0')
+    this.label.setStyle('margin', '0 0 0.5em 0')
+    this.error.setStyle('margin', '0 0 0.5em 0')
 
     super.append(this.label)
     super.append(this.input)
@@ -431,7 +431,7 @@ class nTextInputComponent extends nElement {
   }
 }
 
-class nPasswordInputComponent extends nElement {
+class nPasswordInputComponent extends nTag {
   label = new nText()
   input = new nPasswordInput()
   error = new nTextError()
@@ -439,8 +439,8 @@ class nPasswordInputComponent extends nElement {
   constructor() {
     super({ component: { name: 'password-input-component' } })
 
-    this.label.style('margin', '0 0 0.5rem 0')
-    this.error.style('margin', '0 0 0.5rem 0')
+    this.label.setStyle('margin', '0 0 0.5em 0')
+    this.error.setStyle('margin', '0 0 0.5em 0')
 
     super.append(this.label)
     super.append(this.input)
@@ -448,7 +448,7 @@ class nPasswordInputComponent extends nElement {
   }
 }
 
-class nTextareaComponent extends nElement {
+class nTextareaComponent extends nTag {
   label = new nText()
   textarea = new nTextarea()
   error = new nTextError()
@@ -456,8 +456,8 @@ class nTextareaComponent extends nElement {
   constructor() {
     super({ component: { name: 'textarea-component' } })
 
-    this.label.style('margin', '0 0 0.5rem 0')
-    this.error.style('margin', '0 0 0.5rem 0')
+    this.label.setStyle('margin', '0 0 0.5em 0')
+    this.error.setStyle('margin', '0 0 0.5em 0')
 
     super.append(this.label)
     super.append(this.textarea)
@@ -465,14 +465,14 @@ class nTextareaComponent extends nElement {
   }
 }
 
-class nGalleryComponent extends nElement {
+class nGalleryComponent extends nTag {
   items = []
 
   constructor() {
     super({ component: { name: 'gallery-component' } })
   }
 
-  append(item = new nElement) {
+  append(item = new nTag) {
     const self = this
     self.items.push(item)
     super.append(item)
@@ -480,7 +480,7 @@ class nGalleryComponent extends nElement {
   }
 }
 
-class nGalleryItemComponent extends nElement {
+class nGalleryItemComponent extends nTag {
   image = new nImage()
   title = new nText()
   subtitle = new nText()
@@ -490,11 +490,11 @@ class nGalleryItemComponent extends nElement {
 
     const self = this
 
-    self.style('padding', '1rem')
-    self.style('background-color', '#cccccc')
+    self.setStyle('padding', '1em')
+    self.setStyle('background-color', '#cccccc')
 
-    self.title.style('text-align', 'center')
-    self.subtitle.style('text-align', 'center')
+    self.title.setStyle('text-align', 'center')
+    self.subtitle.setStyle('text-align', 'center')
 
     self.append(self.image)
     self.append(self.title)
@@ -502,7 +502,7 @@ class nGalleryItemComponent extends nElement {
   }
 }
 
-class nFileButtonComponent extends nElement {
+class nFileButtonComponent extends nTag {
   button = new nButton()
   file_input = new nFileInput()
 
@@ -515,7 +515,7 @@ class nFileButtonComponent extends nElement {
     self.button.on('click', () => self.file_input.element.click())
     self.append(self.button)
 
-    self.file_input.style('display', 'none')
+    self.file_input.setStyle('display', 'none')
     self.file_input.on('change', ({ target: { files } }) => {
       const filesArr = Array.from(files)
       filesArr.map((file) => {
