@@ -17,7 +17,7 @@
   <script src="./commons.js"></script>
 
   <script>
-    const app = nElement.fromId('app')
+    const app = nTag.fromId('app')
 
     const center = new nContainerComponent()
 
@@ -29,15 +29,11 @@
     page_subtitle.setText('Fornecedores')
     center.top.append(page_subtitle)
 
-    const providers_list = new nElement()
+    const providers_list = new nTag()
     // TODO
     center.left.append(providers_list)
 
-    Api.providersList({ search: '' })
-      .then(response => {
-        const list = response.get('providers_list')
-        console.log({ list })
-      })
+    Api.providersList({ search: '' }) // TODO
 
     const providers_create_link = new nButtonLink()
     providers_create_link.setText('Adicionar fornecedor')

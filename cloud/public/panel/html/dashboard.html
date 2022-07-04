@@ -17,7 +17,7 @@
   <script src="./commons.js"></script>
 
   <script>
-    const app = nElement.fromId('app')
+    const app = nTag.fromId('app')
 
     const center = new nContainerComponent()
 
@@ -27,16 +27,14 @@
 
     const sales = new nH2()
     sales.setText('Saídas')
-    sales.style('text-align', 'left')
+    sales.setStyle('text-align', 'left')
     center.left.append(sales)
 
-    const sales_list = new nElement()
+    const sales_list = new nTag()
     // TODO
     center.left.append(sales_list)
 
-    Api.providersList()
-      .then((response) => console.log(response))
-      .catch((error) => console.error({ error }))
+    Api.providersList() // TODO
 
     const providers_button = new nButtonLink()
     providers_button.setText('Fornecedores')
