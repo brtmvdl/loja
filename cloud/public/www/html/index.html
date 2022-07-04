@@ -1,1 +1,93 @@
-<a href="panel">panel</a>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julia Store</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script src="./ntag.js"></script>
+  <script>
+    nTag.fromElement(document.body)
+      .setStyle('background-color', '#eee')
+      .setStyle('font-size', '12px')
+
+    const app = nTag.fromId('app')
+
+    const container = new nContainerComponent()
+
+    const browse = new nCard()
+    browse.setStyle('width', '20em')
+    browse.setStyle('background-color', '#fff')
+    
+    browse.header.setText('Navegue por Loja')
+    browse.header.setStyle('font-size', '2em')
+    browse.header.setStyle('padding', '0.5em 0.5em 0em 0.5em')
+
+    const browse_square = new nFlex()
+    browse_square.setStyle('flex-flow', 'wrap')
+
+    const groups = [
+      { image_url: './images/512x512.png', title: 'Ferramentas' },
+      { image_url: './images/512x512.png', title: 'Dispositivos Echo' },
+      { image_url: './images/512x512.png', title: 'Games' },
+      { image_url: './images/512x512.png', title: 'Jóias' },
+    ]
+
+    groups.forEach(({ image_url, title }) => {
+      const ntag = new nSpan()
+      ntag.setStyleContainer('justify-content', 'space-between')
+      ntag.setStyle('margin', '0em 1em 1.5em 0.5em')
+      ntag.setStyle('width', '8em')
+      ntag.setStyle('display', 'inline-block')
+
+      const image_link = new nLink()
+      image_link.href('#')
+      const image = new nImage()
+      image.src(image_url)
+      image.alt(title)
+      image_link.append(image)
+      ntag.append(image_link)
+
+      const text_link = new nLink()
+      text_link.href('#')
+      text_link.setStyle('color', '#000')
+      const text = new nText()
+      text.setText(title)
+      text_link.append(text)
+      ntag.append(text_link)
+
+      browse_square.append(ntag)
+    })
+
+    browse.body.append(browse_square)
+    browse.body.setStyle('padding', '0.5em 0.5em 0em 0.5em')
+
+    const browse_link = new nLink()
+    browse_link.setStyleContainer('text-align', 'left')
+    browse_link.setText('Veja mais')
+    browse_link.href('/todos-os-produtos')
+    browse.footer.append(browse_link)
+    browse.footer.setStyle('padding', '0em 1em 1em 1em')
+
+    container.body.append(browse)
+
+    app.append(container)
+
+    const footer = new nTag()
+
+    const panelLink = new nLink()
+    panelLink.setText('Panel')
+    panelLink.href('/panel')
+    footer.append(panelLink)
+
+    app.append(footer)
+  </script>
+</body>
+
+</html>
