@@ -78,6 +78,10 @@ class DataBase {
       .map((param) => new DataObject(this.params.dir, param), this)
   }
 
+  listJSON() {
+    return this.list().map(item => item.toJSON())
+  }
+
   select(params = {}) {
     return this.list()
       .filter((data) => Object.keys(params)
