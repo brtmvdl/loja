@@ -34,12 +34,18 @@
     // TODO
     center.left.append(sales_list)
 
-    Api.providersList() // TODO
+    Api.productsList() // TODO
+    // Api.providersList() // TODO
 
     const providers_button = new nButtonLink()
-    providers_button.setText('Fornecedores')
     providers_button.href('providers_list.html')
+    providers_button.setText('Fornecedores')
     center.right.append(providers_button)
+
+    const products_button = new nButtonLink()
+    products_button.href('products_list.html')
+    products_button.setText('Produtos')
+    center.right.append(products_button)
 
     app.append(center)
   </script>
