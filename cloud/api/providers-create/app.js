@@ -4,7 +4,7 @@ const providersIndex = db.in('providers')
 const loginsIndex = db.in('logins')
 
 module.exports = ({ body: { name }, headers: { login } }, res) => {
-  const loginDB = loginsIndex.get(login)
+  const loginDB = loginsIndex.selectById(login)
   if (!loginDB) throw new NotFoundError('Login not found.')
 
   const user_id = loginDB.readString('user_id')

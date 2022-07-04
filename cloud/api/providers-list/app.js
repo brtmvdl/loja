@@ -3,7 +3,7 @@ const providersIndex = db.in('providers')
 const loginsIndex = db.in('logins')
 
 module.exports = ({ headers: { login } }, res) => {
-  const loginDB = loginsIndex.get(login)
+  const loginDB = loginsIndex.selectById(login)
   const user_id = loginDB.readString('user_id')
 
   return res.json({
