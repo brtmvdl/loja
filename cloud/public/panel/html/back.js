@@ -151,5 +151,19 @@ Api.providersCreate = ({ name } = {}) =>
     .then(() => Ajax.post(['providers', 'create'], { name }))
     .then(() => Flow.goTo('dashboard.html'))
 
+Api.productsList = ({ search } = {} = {}) =>
+  Ajax.post(['products', 'list'], { search })
+
+Api.productsCreate = ({ name, price, photos } = {}) =>
+  Validator.with({ name, price, photos })
+    .validate({
+      name: [Validation.required()],
+      price: [Validation.required()],
+      photos: [Validation.required()],
+    })
+    .then(() => Ajax.post(['products', 'create'], { name, price, photos }))
+    .then(() => Flow.goTo('dashboard.html'))
+
 Api.upload = (file, { name, size, type } = {}) =>
   Ajax.upload(file, { name, size, type })
+
