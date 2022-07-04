@@ -26,8 +26,8 @@ services:
     volumes:
       - './cloud/api/upload:/go/src'
       - './cloud/api/commons:/julia_store/commons'
-      - './data:/julia_store/data'
       - './logs:/julia_store/logs'
+      - './data:/julia_store/data'
 
   api_users_login:
     hostname: api_users_login
@@ -36,8 +36,8 @@ services:
     volumes:
       - './cloud/api/users-login:/julia_store/app'
       - './cloud/api/commons:/julia_store/commons'
-      - './data:/julia_store/data'
       - './logs/api_users_login:/julia_store/logs'
+      - './data:/julia_store/data'
 
   api_users_register:
     hostname: api_users_register
@@ -46,8 +46,8 @@ services:
     volumes:
       - './cloud/api/users-register:/julia_store/app'
       - './cloud/api/commons:/julia_store/commons'
-      - './data:/julia_store/data'
       - './logs/api_users_register:/julia_store/logs'
+      - './data:/julia_store/data'
 
   api_providers_list:
     hostname: api_providers_list
@@ -56,8 +56,8 @@ services:
     volumes:
       - './cloud/api/providers-list:/julia_store/app'
       - './cloud/api/commons:/julia_store/commons'
-      - './data:/julia_store/data'
       - './logs/api_providers_list:/julia_store/logs'
+      - './data:/julia_store/data'
 
   api_providers_create:
     hostname: api_providers_create
@@ -66,5 +66,26 @@ services:
     volumes:
       - './cloud/api/providers-create:/julia_store/app'
       - './cloud/api/commons:/julia_store/commons'
-      - './data:/julia_store/data'
       - './logs/api_providers_create:/julia_store/logs'
+      - './data:/julia_store/data'
+
+  api_products_list:
+    hostname: api_products_list
+    build: './cloud/api/products-list'
+    restart: always
+    volumes:
+      - './cloud/api/products-list:/julia_store/app'
+      - './cloud/api/commons:/julia_store/commons'
+      - './logs/api_products_list:/julia_store/logs'
+      - './data:/julia_store/data'
+
+  api_products_create:
+    hostname: api_products_create
+    build: './cloud/api/products-create'
+    restart: always
+    volumes:
+      - './cloud/api/products-create:/julia_store/app'
+      - './cloud/api/commons:/julia_store/commons'
+      - './logs/api_products_create:/julia_store/logs'
+      - './data:/julia_store/data'
+
