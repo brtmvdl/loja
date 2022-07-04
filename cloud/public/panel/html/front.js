@@ -231,6 +231,23 @@ class nFileInput extends nValuable {
     const self = this
 
     self.attr('type', 'file')
+
+    self.on('change', ({ target: { files } }) => {
+      Array.from(files).map((file) => {
+        const { name, size, type } = file
+        Api.upload(file, { name, size, type })
+          .then((response) => {
+            const event = new Event('file')
+            event.file = response.getData()
+            self.element.dispatchEvent(event)
+          })
+          .catch((error) => {
+            const event = new Event('fileerror')
+            event.error = error
+            self.element.dispatchEvent(event)
+          })
+      })
+    })
   }
 
   multiple() {
@@ -368,6 +385,7 @@ class nButtonLink extends nLink {
   constructor() {
     super({ component: { name: 'button-link' } })
 
+    this.setStyle('margin', '0em 0em 0.5em 0em')
     this.setStyle('background-color', '#dddddd')
     this.setStyle('box-shadow', 'border-box')
     this.setStyle('display', 'inline-block')
@@ -465,18 +483,53 @@ class nTextareaComponent extends nTag {
   }
 }
 
-class nGalleryComponent extends nTag {
-  items = []
+class nFileInputComponent extends nTag {
+  label = new nText()
+  input = new nFileInput()
+  button = new nButton()
+  error = new nTextError()
 
   constructor() {
-    super({ component: { name: 'gallery-component' } })
+    super({
+      component: { name: 'file-input-component' },
+    })
+
+    const self = this
+
+    self.label.setStyle('margin', '0 0 0.5em 0')
+    super.append(self.label)
+
+    self.input.setStyle('display', 'none')
+    super.append(self.input)
+
+    self.button.setText('Adicionar arquivos')
+    super.append(self.button)
+
+    self.error.setStyle('margin', '0 0 0.5em 0')
+    super.append(self.error)
+
+    self.button.on('click', () => self.input.element.click())
+  }
+}
+
+class nGalleryComponent extends nTag {
+  ids = []
+
+  constructor() {
+    super({
+      component: { name: 'gallery-component' },
+    })
   }
 
-  append(item = new nTag) {
-    const self = this
-    self.items.push(item)
-    super.append(item)
-    return self
+  addPhotoId(id) {
+    const image = new nImage()
+    image.src(`http://0.0.0.0/files/${id}/file`)
+    super.append(image)
+    this.ids.push(id)
+  }
+
+  append() {
+    throw new Error('Can not do this.')
   }
 }
 
