@@ -1,5 +1,5 @@
-const db = require('/julia_store/commons/db')
-const { NotFoundError } = require('/julia_store/commons/errors')
+const db = require('/loja_store/commons/db')
+const { NotFoundError } = require('/loja_store/commons/errors')
 const loginIndex = db.in('logins')
 const userIndex = db.in('users')
 

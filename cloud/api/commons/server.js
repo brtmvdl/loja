@@ -1,8 +1,8 @@
-const { ApplicationError } = require('/julia_store/commons/errors')
+const { ApplicationError } = require('/loja_store/commons/errors')
 const netPkg = require('net')
 const { Buffer } = require('buffer')
 
-const app = require('/julia_store/app/app')
+const app = require('/loja_store/app/app')
 
 const LINE_BREAK = '\r\n'
 

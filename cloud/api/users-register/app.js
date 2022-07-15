@@ -1,5 +1,5 @@
-const { DuplicatedError } = require('/julia_store/commons/errors')
-const usersIndex = require('/julia_store/commons/db').in('users')
+const { DuplicatedError } = require('/loja_store/commons/errors')
+const usersIndex = require('/loja_store/commons/db').in('users')
 
 module.exports = ({ body: { email, password } }, res) => {
   if (usersIndex.selectOne({ email, password }))
