@@ -25,67 +25,67 @@ services:
     restart: always
     volumes:
       - './cloud/api/upload:/go/src'
-      - './cloud/api/commons:/julia_store/commons'
-      - './logs:/julia_store/logs'
-      - './data:/julia_store/data'
+      - './cloud/api/commons:/loja_store/commons'
+      - './logs:/loja_store/logs'
+      - './data:/loja_store/data'
 
   api_users_login:
     hostname: api_users_login
     build: './cloud/api/users-login'
     restart: always
     volumes:
-      - './cloud/api/users-login:/julia_store/app'
-      - './cloud/api/commons:/julia_store/commons'
-      - './logs/api_users_login:/julia_store/logs'
-      - './data:/julia_store/data'
+      - './cloud/api/users-login:/loja_store/app'
+      - './cloud/api/commons:/loja_store/commons'
+      - './logs/api_users_login:/loja_store/logs'
+      - './data:/loja_store/data'
 
   api_users_register:
     hostname: api_users_register
     build: './cloud/api/users-register'
     restart: always
     volumes:
-      - './cloud/api/users-register:/julia_store/app'
-      - './cloud/api/commons:/julia_store/commons'
-      - './logs/api_users_register:/julia_store/logs'
-      - './data:/julia_store/data'
+      - './cloud/api/users-register:/loja_store/app'
+      - './cloud/api/commons:/loja_store/commons'
+      - './logs/api_users_register:/loja_store/logs'
+      - './data:/loja_store/data'
 
   api_providers_list:
     hostname: api_providers_list
     build: './cloud/api/providers-list'
     restart: always
     volumes:
-      - './cloud/api/providers-list:/julia_store/app'
-      - './cloud/api/commons:/julia_store/commons'
-      - './logs/api_providers_list:/julia_store/logs'
-      - './data:/julia_store/data'
+      - './cloud/api/providers-list:/loja_store/app'
+      - './cloud/api/commons:/loja_store/commons'
+      - './logs/api_providers_list:/loja_store/logs'
+      - './data:/loja_store/data'
 
   api_providers_create:
     hostname: api_providers_create
     build: './cloud/api/providers-create'
     restart: always
     volumes:
-      - './cloud/api/providers-create:/julia_store/app'
-      - './cloud/api/commons:/julia_store/commons'
-      - './logs/api_providers_create:/julia_store/logs'
-      - './data:/julia_store/data'
+      - './cloud/api/providers-create:/loja_store/app'
+      - './cloud/api/commons:/loja_store/commons'
+      - './logs/api_providers_create:/loja_store/logs'
+      - './data:/loja_store/data'
 
   api_products_list:
     hostname: api_products_list
     build: './cloud/api/products-list'
     restart: always
     volumes:
-      - './cloud/api/products-list:/julia_store/app'
-      - './cloud/api/commons:/julia_store/commons'
-      - './logs/api_products_list:/julia_store/logs'
-      - './data:/julia_store/data'
+      - './cloud/api/products-list:/loja_store/app'
+      - './cloud/api/commons:/loja_store/commons'
+      - './logs/api_products_list:/loja_store/logs'
+      - './data:/loja_store/data'
 
   api_products_create:
     hostname: api_products_create
     build: './cloud/api/products-create'
     restart: always
     volumes:
-      - './cloud/api/products-create:/julia_store/app'
-      - './cloud/api/commons:/julia_store/commons'
-      - './logs/api_products_create:/julia_store/logs'
-      - './data:/julia_store/data'
+      - './cloud/api/products-create:/loja_store/app'
+      - './cloud/api/commons:/loja_store/commons'
+      - './logs/api_products_create:/loja_store/logs'
+      - './data:/loja_store/data'
 

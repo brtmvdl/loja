@@ -1,6 +1,6 @@
-# Loja da Julia
+# Loja
 
-Só um app para loja
+Um app pra lojas
 
 ## Funcionalidades
 
